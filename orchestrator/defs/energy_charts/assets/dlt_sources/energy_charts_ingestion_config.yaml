@@ -1,0 +1,13 @@
+energy_charts_ingestion_pipeline:
+  defaults:
+    schema_contract:
+      tables: "evolve"
+      columns: "evolve"
+
+  destination:
+    type: "filesystem"
+    dataset_name: "energy_charts"
+
+  normalize:
+    data_writer:
+      disable_compression: true

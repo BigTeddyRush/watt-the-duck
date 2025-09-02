@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: dagster
+    tables:
+      - name: energy_charts_to_duckdb_price
+        meta:
+          dagster:
+            asset_key: ["energy_charts_to_duckdb_price"]

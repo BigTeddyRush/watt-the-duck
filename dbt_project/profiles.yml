@@ -1,0 +1,14 @@
+dbt_project:
+  target: "{{ env_var('DBT_TARGET', 'local') }}"
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH') }}"
+      schema: "{{ env_var('DUCKDB_SCHEMA') }}"
+      extensions:
+        - httpfs
+        - parquet
+      # optional DuckDB settings
+      # settings:
+      #   memory_limit: 8GB
+      #   temp_directory: /tmp/duckdb_tmp

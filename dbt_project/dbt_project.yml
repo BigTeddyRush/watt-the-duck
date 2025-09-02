@@ -1,0 +1,36 @@
+name: datahub_dbt
+version: "1.0.0"
+config-version: 2
+profile: "dbt_project"
+
+require-dbt-version: ">=1.5.0"
+
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  reload_data: false
+
+models:
+  datahub_dbt:
+    # Global defaults
+    +on_schema_change: append_new_columns      # works with incremental+merge on DuckDB
+    +persist_docs:
+      relation: true
+      columns: true
+
+    # Quelle: energy_charts
+    energy_charts:
+      staging:
+        +schema: staging
+        +materialized: table
+        # For incremental on DuckDB, make sure models define a unique_key and use merge strategy if needed:
+        # +incremental_strategy: merge
+        # +unique_key: <your_key>

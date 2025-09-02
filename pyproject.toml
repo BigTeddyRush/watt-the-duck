@@ -1,0 +1,37 @@
+[project]
+name = "orchestrator"
+version = "0.1.0"
+description = "Orchestrator"
+readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "dagster==1.10.13",
+    "dagster-cloud",
+    "dagster-dbt",
+    "dagster-embedded-elt",
+    "dagster-powerbi",
+    "dlt",
+    "dlt[az]",
+    "dbt-core>=1.8,<1.9",
+    "dbt-duckdb>=1.8,<1.9",
+    "duckdb>=0.10",                # local engine (CLI & Python client)
+    "entsoe-py"
+]
+
+[project.optional-dependencies]
+dev = [
+    "dagit",
+    "dagster-webserver",
+    "pytest",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "orchestrator.definitions"
+project_name = "orchestrator"
+
+[tool.setuptools.packages.find]
+exclude = ["infrastructure", "dbt_project"]
