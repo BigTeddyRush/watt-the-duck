@@ -7,3 +7,11 @@ sources:
         meta:
           dagster:
             asset_key: ["energy_charts_to_duckdb_price"]
+      - name: energy_charts_to_duckdb_cross_border_electricity_trading
+        meta:
+          dagster:
+            asset_key: ["energy_charts_to_duckdb_cross_border_electricity_trading"]
+      - name: energy_charts_to_duckdb_public_power_forecast
+        meta:
+          dagster:
+            asset_key: ["energy_charts_to_duckdb_public_power_forecast"]

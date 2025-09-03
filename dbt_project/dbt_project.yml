@@ -34,3 +34,7 @@ models:
         # For incremental on DuckDB, make sure models define a unique_key and use merge strategy if needed:
         # +incremental_strategy: merge
         # +unique_key: <your_key>
+      intermediate:
+        +schema: intermediate
+        +materialized: incremental
+        +incremental_strategy: merge

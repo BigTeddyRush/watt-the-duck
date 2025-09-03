@@ -202,6 +202,7 @@ def energy_charts_importer(context, resource_name:str, config_params: dict):
             if not public_power_forecast_df:
                 raise Failure(f"No data returned from {public_power_forecast_url} with params: {config_params_temp}")
             public_power_forecast_df = pd.concat(public_power_forecast_df, ignore_index=True)
+            public_power_forecast_df = public_power_forecast_df.drop(columns=["deprecated"])
             public_power_forecast_json = public_power_forecast_df.to_dict(orient='records')
 
             yield from public_power_forecast_json
