@@ -228,11 +228,24 @@ def energy_charts_importer(context, resource_name:str, config_params: dict):
 
             response_json = response.json()
 
-            price_df = pd.DataFrame({key: pd.Series(value) for key, value in response_json.items()})
+            # turn lists into Series, scalars into repeated lists
+            cols = {}
+            for key, value in response_json.items():
+                if isinstance(value, list):
+                    cols[key] = value
+                else:
+                    # repeat scalar for each row
+                    n = len(next(v for v in response_json.values() if isinstance(v, list)))
+                    cols[key] = [value] * n
+
+            price_df = pd.DataFrame(cols)
+
             price_df["bzn"] = config_params["bzn"]
             price_df = price_df.drop(columns=["deprecated", "license_info"])
 
             price_json = price_df.to_dict(orient='records')
+
+            context.log.info(price_json)
 
             yield from price_json
 

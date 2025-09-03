@@ -48,6 +48,6 @@ class EnergyChartsApiParamsConfig(Config):
         description="forecast_type: Can be current, intraday or day-ahead."
     )
     write_disposition: Optional[str] = Field(
-        default="append",
+        default="replace",
         description="Write disposition for the data ['append','replace'] defaults to append."
     )
