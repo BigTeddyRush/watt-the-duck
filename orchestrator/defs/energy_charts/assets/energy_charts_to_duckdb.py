@@ -41,9 +41,8 @@ def energy_charts_to_duckdb(source_name: str, resource_name: str, resolution: st
                 partition_start = pd.Timestamp(context.partition_key, tz="Europe/Berlin")
                 partition_end = partition_start
             elif context.has_partition_key_range:
-                raise ValueError(
-                    "This asset only supports ONE day per run."
-                )
+                partition_start = pd.Timestamp(context.partition_key_range.start, tz="Europe/Berlin")
+                partition_end = pd.Timestamp(context.partition_key_range.end, tz="Europe/Berlin")
             else:
                 raise ValueError("No partition key found for partitioned run")
 

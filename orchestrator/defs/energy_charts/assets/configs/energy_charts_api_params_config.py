@@ -40,11 +40,11 @@ class EnergyChartsApiParamsConfig(Config):
         description="If true, the net installation / decommission numbers are returned instead of total installed power."
     )
     production_types: Optional[List[str]] = Field(
-        default=None,
+        default=["solar","wind_onshore","wind_offshore","load"],
         description="production_type: Can be solar, wind_onshore, wind_offshore or load."
     )
     forecast_types: Optional[List[str]] = Field(
-        default=None,
+        default=["current","intraday","day-ahead"],
         description="forecast_type: Can be current, intraday or day-ahead."
     )
     write_disposition: Optional[str] = Field(

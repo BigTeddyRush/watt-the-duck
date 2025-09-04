@@ -1,4 +1,4 @@
-{{ config(materialized='incremental', unique_key='dlt_id_15min') }}
+{{ config(materialized='incremental', unique_key='unix_seconds_15min') }}
 
 with base as (
   select *
@@ -24,9 +24,6 @@ expanded as (
          relation_alias='b',
          except=["unix_seconds", "_dlt_id", "_dlt_load_id", "day", "month", "year"]
     ) }},
-
-    -- synthetic unique key for incremental
-    concat(b._dlt_id, '_', o.step) as dlt_id_15min
   from base b
   cross join offsets o
 )

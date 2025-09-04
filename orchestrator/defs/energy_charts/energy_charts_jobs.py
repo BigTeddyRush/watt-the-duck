@@ -25,7 +25,7 @@ energy_charts_daily_partitioned_import_job = define_asset_job(
     tags={"dagster/max_runtime": 600}
 )
 
-energy_charts_daily_partitioned_import_schedule="0 0 * * *"
+energy_charts_daily_partitioned_import_schedule="8 10 * * *"
 
 energy_charts_daily_partitioned_job_schedule = ScheduleDefinition(job=energy_charts_daily_partitioned_import_job,
                                                                   cron_schedule=energy_charts_daily_partitioned_import_schedule,

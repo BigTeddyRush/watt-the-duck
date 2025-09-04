@@ -38,3 +38,7 @@ models:
         +schema: intermediate
         +materialized: incremental
         +incremental_strategy: merge
+      core:
+        +schema: core
+        +materialized: incremental
+        +incremental_strategy: merge
