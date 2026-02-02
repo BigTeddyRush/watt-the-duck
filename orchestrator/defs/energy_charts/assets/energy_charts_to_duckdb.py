@@ -64,13 +64,22 @@ def energy_charts_to_duckdb(source_name: str, resource_name: str, resolution: st
             })
 
             # --- Build layout using the *data* day, not load day ---
-            layout = (
-                f"{{table_name}}/"
-                f"year={start_dt.strftime('%Y')}/"
-                f"month={start_dt.strftime('%m')}/"
-                f"day={start_dt.strftime('%d')}/"
-                f"{{load_id}}.{{file_id}}.{{ext}}"
-            )
+            if context.has_partition_key:
+                layout = (
+                    f"{{table_name}}/"
+                    f"year={start_dt.strftime('%Y')}/"
+                    f"month={start_dt.strftime('%m')}/"
+                    f"day={start_dt.strftime('%d')}/"
+                    f"{{load_id}}.{{file_id}}.{{ext}}"
+                )
+            else:
+                layout = (
+                    f"{{table_name}}/"
+                    f"refill/"
+                    f"start={start_dt.strftime('%Y')}{start_dt.strftime('%m')}{start_dt.strftime('%d')}/"
+                    f"end={end_dt.strftime('%Y')}{end_dt.strftime('%m')}{end_dt.strftime('%d')}/"
+                    f"{{load_id}}.{{file_id}}.{{ext}}"
+                )
         else:
             # Non-partitioned: keep default behavior or choose a default
             layout = None
